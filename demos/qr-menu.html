@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Velvet Roast Cafe | Dijital Masa QR Menü & QR Kod Örneği — Baserora</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#0B0A09] text-[#F5F2EB] font-sans antialiased min-h-screen">
+
+  <!-- BASERORA DEMO ÜST BİLGİ BARI -->
+  <div class="bg-[#050507] text-white px-4 py-2.5 text-xs border-b border-white/10 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <a href="../preview.html#vitrin" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#D61F26] hover:bg-[#b8171d] text-white font-semibold transition-colors">
+          <span>← Baserora Vitrinine Dön</span>
+        </a>
+        <span class="text-white/70 hidden sm:inline">Konsept Demo #03: <strong>Masa QR Menü Sistemi</strong> (Kurgusal Kafe Menüsü + Yanda Örnek Masa QR Kodu)</span>
+      </div>
+      <a href="../preview.html#iletisim" class="text-[#D61F26] hover:underline font-semibold">İletişime Geç →</a>
+    </div>
+  </div>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+
+      <!-- SOL SÜTUN (7 SÜTUN): KURGUSAL CAFE DİJİTAL QR MENÜSÜ ("VELVET ROAST CAFE") -->
+      <div class="lg:col-span-7 bg-[#141210] rounded-[32px] border border-[#2C2621] overflow-hidden shadow-2xl">
+
+        <!-- Kafe Kapak Görseli & Başlık -->
+        <div class="relative h-52 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80" alt="Velvet Roast Cafe" class="w-full h-full object-cover opacity-65" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#141210] via-[#141210]/40 to-transparent"></div>
+
+          <div class="absolute top-4 left-4 right-4 flex items-center justify-between">
+            <span id="active-table-badge" class="px-3.5 py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-amber-500/40 text-amber-400 font-mono text-xs font-bold">
+              📍 MASA #07 • BAHÇE TERAS
+            </span>
+            <div class="flex items-center gap-2">
+              <button onclick="callWaiter()" class="px-3.5 py-1.5 rounded-full bg-amber-600 hover:bg-amber-500 text-white text-xs font-bold shadow-lg transition-all">
+                🔔 Garson Çağır
+              </button>
+            </div>
+          </div>
+
+          <div class="absolute bottom-4 left-6 right-6 flex items-end justify-between">
+            <div>
+              <div class="text-[11px] font-mono uppercase tracking-[0.25em] text-amber-400">ARTISAN ROASTERY &amp; BAKERY</div>
+              <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Velvet Roast Co.</h1>
+            </div>
+            <div class="text-right hidden sm:block">
+              <div class="text-[11px] text-white/60">Wi-Fi Şifresi</div>
+              <div class="font-mono text-xs text-amber-300 font-bold">velvet2026</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kategori Seçici Bar -->
+        <div class="px-6 pt-4 pb-3 border-b border-[#26211D] sticky top-[41px] bg-[#141210]/95 backdrop-blur-md z-20">
+          <div id="menu-categories" class="flex items-center gap-2 overflow-x-auto pb-1"></div>
+        </div>
+
+        <!-- Menü Ürün Listesi -->
+        <div id="menu-items" class="p-6 space-y-4"></div>
+
+        <!-- Alt Masa Sipariş Özeti Barı -->
+        <div class="p-5 bg-[#1C1815] border-t border-[#2E2722] flex items-center justify-between">
+          <div>
+            <div class="text-xs text-[#A69B8F]">Masa Sepetiniz (<span id="cart-count">2</span> Ürün)</div>
+            <div id="cart-total" class="text-xl font-extrabold text-amber-400">₺355</div>
+          </div>
+          <button onclick="sendTableOrder()" class="px-6 py-3 rounded-2xl bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-lg">
+            Siparişi Mutfağa İlet →
+          </button>
+        </div>
+      </div>
+
+      <!-- SAĞ SÜTUN (5 SÜTUN): YANDA ÖRNEK QR KOD STANDI & CANLI YÖNETİM PANELİ -->
+      <div class="lg:col-span-5 lg:sticky lg:top-16 space-y-6">
+
+        <!-- MASA ÜSTÜ ÖRNEK QR KOD KARTI -->
+        <div class="rounded-[32px] bg-gradient-to-b from-[#1D1916] to-[#12100E] border border-amber-500/30 p-7 text-center shadow-2xl relative overflow-hidden">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 font-mono text-[11px] mb-3">
+            <span>ÖRNEK MASA ÜSTÜ QR KOD STANDI</span>
+          </div>
+          <h2 class="text-xl font-extrabold text-white">Velvet Roast — Dijital Menü</h2>
+          <p class="text-xs text-[#A69B8F] mt-1 mb-6">Kameranızla okutun veya soldaki canlı menüden inceleyin</p>
+
+          <!-- ÖRNEK SVG QR KOD ÇERÇEVESİ -->
+          <div class="bg-white p-5 rounded-3xl w-60 h-60 mx-auto shadow-[0_0_50px_rgba(245,158,11,0.18)] flex flex-col items-center justify-center relative">
+            <svg id="qr-svg" viewBox="0 0 210 210" class="w-full h-full text-[#141210]" fill="currentColor">
+              <!-- Sol Üst Köşe Gözü -->
+              <path d="M10,10 h60 v60 h-60 z M20,20 v40 h40 v-40 z M30,30 h20 v20 h-20 z" />
+              <!-- Sağ Üst Köşe Gözü -->
+              <path d="M140,10 h60 v60 h-60 z M150,20 v40 h40 v-40 z M160,30 h20 v20 h-20 z" />
+              <!-- Sol Alt Köşe Gözü -->
+              <path d="M10,140 h60 v60 h-60 z M20,150 v40 h40 v-40 z M30,160 h20 v20 h-20 z" />
+              <!-- Veri Modülleri -->
+              <rect x="80" y="10" width="10" height="20" />
+              <rect x="100" y="10" width="20" height="10" />
+              <rect x="80" y="40" width="20" height="10" />
+              <rect x="110" y="30" width="20" height="20" />
+              <rect x="80" y="60" width="10" height="10" />
+              <rect x="100" y="60" width="30" height="10" />
+              <rect x="10" y="80" width="20" height="10" />
+              <rect x="40" y="80" width="30" height="10" />
+              <rect x="10" y="100" width="10" height="20" />
+              <rect x="30" y="100" width="20" height="10" />
+              <rect x="60" y="110" width="20" height="20" />
+              <rect x="140" y="80" width="20" height="10" />
+              <rect x="170" y="80" width="30" height="10" />
+              <rect x="150" y="100" width="20" height="20" />
+              <rect x="180" y="110" width="20" height="10" />
+              <rect x="80" y="140" width="20" height="10" />
+              <rect x="110" y="140" width="10" height="20" />
+              <rect x="140" y="140" width="20" height="20" />
+              <rect x="170" y="130" width="30" height="10" />
+              <rect x="80" y="160" width="10" height="30" />
+              <rect x="100" y="170" width="30" height="10" />
+              <rect x="140" y="170" width="10" height="30" />
+              <rect x="160" y="160" width="20" height="10" />
+              <rect x="190" y="150" width="10" height="30" />
+              <rect x="100" y="190" width="20" height="10" />
+              <rect x="160" y="180" width="30" height="20" />
+            </svg>
+            <!-- Orta Kafe Logosu -->
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div class="w-12 h-12 rounded-xl bg-[#141210] text-amber-400 font-extrabold text-xs flex flex-col items-center justify-center border-2 border-white shadow-md">
+                <span>VR</span>
+                <span id="qr-center-table" class="text-[8px] font-mono text-white">#07</span>
+              </div>
+            </div>
+          </div>
+
+          <div id="qr-caption" class="mt-4 font-mono text-sm font-bold text-amber-400">
+            MASA #07 • BAHÇE TERAS
+          </div>
+          <div class="text-[11px] text-[#A69B8F] mt-1">
+            Uygulama indirmeden saniyeler içinde açılır
+          </div>
+
+          <!-- Masa Değiştirici Test Butonları -->
+          <div class="mt-6 pt-5 border-t border-white/10">
+            <div class="text-[11px] font-mono uppercase text-[#A69B8F] mb-2.5">Farklı Masaların QR Kodunu Test Edin:</div>
+            <div class="grid grid-cols-3 gap-2">
+              <button onclick="setTable('MASA #04 • İÇ SALON', '#04')" class="py-2 px-2 rounded-xl bg-white/5 hover:bg-amber-600/20 border border-white/10 text-xs font-semibold text-white">Masa #04</button>
+              <button onclick="setTable('MASA #07 • BAHÇE TERAS', '#07')" class="py-2 px-2 rounded-xl bg-amber-600/25 border border-amber-500 text-xs font-semibold text-amber-300">Masa #07</button>
+              <button onclick="setTable('MASA #12 • ÜST KAT', '#12')" class="py-2 px-2 rounded-xl bg-white/5 hover:bg-amber-600/20 border border-white/10 text-xs font-semibold text-white">Masa #12</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- YÖNETİCİ CANLI FİYAT & STOK TEST KUTUSU -->
+        <div class="rounded-3xl bg-[#141210] border border-[#2C2621] p-6 space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs text-[#D61F26] font-bold">// BASERORA YÖNETİCİ PANELİ SİMÜLASYONU</span>
+            <span class="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-400 font-mono text-[10px]">CANLI SENKRON</span>
+          </div>
+          <p class="text-xs text-[#A69B8F] leading-relaxed">
+            Baserora QR Menü sisteminde işletme sahibi fiyat veya stok değiştirdiğinde masadaki menü anında güncellenir. Hemen aşağıdan deneyin:
+          </p>
+          <div class="grid grid-cols-2 gap-2.5">
+            <button onclick="togglePriceBoost()" class="py-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-white transition-all">
+              ⚡ Fiyatları Güncelle Testi
+            </button>
+            <button onclick="toggleSoldOut()" class="py-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-white transition-all">
+              🥐 "Tükendi" Rozeti Testi
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    const menuData = [
+      { id: 1, cat: '☕ İmza Kahveler', name: 'Madagaskar Vanilyalı Cortado', desc: '%100 Arabica çift shot espresso, ev yapımı vanilya özütü ve kadifemsi süt köpüğü.', cal: '110 kcal', tag: 'Barista Seçimi', basePrice: 165, img: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=400&q=80', soldOut: false },
+      { id: 2, cat: '☕ İmza Kahveler', name: 'Etiyopya Yirgacheffe V60 Demleme', desc: 'Bergamot, yasemin çiçeği ve şeftali notalarına sahip nitelikli filtre kahve.', cal: '5 kcal', tag: 'Single Origin', basePrice: 180, img: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&q=80', soldOut: false },
+      { id: 3, cat: '🧊 Soğuk Kahveler', name: 'Salted Caramel Iced Latte', desc: 'Soğuk demleme espresso, deniz tuzlu karamel sos ve yulaf sütü alternatifi.', cal: '160 kcal', tag: 'Popüler', basePrice: 185, img: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=400&q=80', soldOut: false },
+      { id: 4, cat: '🥐 Kruvasan & Fırın', name: 'Antep Fıstık Kremalı Fransız Kruvasan', desc: 'Fransız tereyağlı çıtır kruvasan içerisinde %100 Boz fıstık ezmesi dolgusu.', cal: '410 kcal', tag: 'Günlük Taze', basePrice: 225, img: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=400&q=80', soldOut: false },
+      { id: 5, cat: '🍰 Tatlılar', name: 'Belçika Çikolatalı San Sebastián', desc: 'İçi akışkan fırınlanmış cheesecake, üzerinde sıcak Callebaut çikolata.', cal: '480 kcal', tag: 'Glutensiz', basePrice: 245, img: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=400&q=80', soldOut: false }
+    ];
+
+    let activeCategory = 'Tümü';
+    let priceMultiplier = 1;
+    let cartItems = [1, 2];
+
+    function renderMenu() {
+      const cats = ['Tümü', '☕ İmza Kahveler', '🧊 Soğuk Kahveler', '🥐 Kruvasan & Fırın', '🍰 Tatlılar'];
+      document.getElementById('menu-categories').innerHTML = cats.map(c => `
+        <button onclick="activeCategory='${c}'; renderMenu()" class="px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all ${activeCategory === c ? 'bg-amber-500 text-black' : 'bg-[#1F1B18] text-[#A69B8F] hover:text-white'}">${c}</button>
+      `).join('');
+
+      const list = activeCategory === 'Tümü' ? menuData : menuData.filter(m => m.cat === activeCategory);
+      document.getElementById('menu-items').innerHTML = list.map(item => {
+        const finalPrice = Math.round(item.basePrice * priceMultiplier);
+        return `
+          <div class="p-4 rounded-2xl bg-[#1C1815] border border-[#2C2520] flex items-center gap-4 ${item.soldOut ? 'opacity-50' : ''}">
+            <img src="${item.img}" alt="${item.name}" class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover shrink-0" />
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="px-2 py-0.5 rounded bg-amber-500/15 text-amber-400 text-[10px] font-bold">${item.tag}</span>
+                <span class="text-[11px] text-[#A69B8F]">${item.cal}</span>
+              </div>
+              <h3 class="font-bold text-white text-sm sm:text-base truncate">${item.name}</h3>
+              <p class="text-xs text-[#A69B8F] line-clamp-2 mt-0.5">${item.desc}</p>
+              <div class="flex items-center justify-between mt-3">
+                <span class="text-base sm:text-lg font-extrabold text-amber-400">₺${finalPrice}</span>
+                ${item.soldOut
+                  ? `<span class="px-3 py-1.5 rounded-xl bg-red-500/20 text-red-400 text-xs font-bold">Bugün Tükendi</span>`
+                  : `<button onclick="addToCart(${item.id})" class="px-3.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black text-xs font-extrabold transition-all">+ Masaya Ekle</button>`
+                }
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const total = cartItems.reduce((sum, id) => {
+        const found = menuData.find(m => m.id === id);
+        return sum + (found ? Math.round(found.basePrice * priceMultiplier) : 0);
+      }, 0);
+      document.getElementById('cart-count').textContent = cartItems.length;
+      document.getElementById('cart-total').textContent = `₺${total}`;
+    }
+
+    function addToCart(id) {
+      cartItems.push(id);
+      renderMenu();
+    }
+
+    function setTable(label, shortCode) {
+      document.getElementById('active-table-badge').textContent = `📍 ${label}`;
+      document.getElementById('qr-caption').textContent = label;
+      document.getElementById('qr-center-table').textContent = shortCode;
+    }
+
+    function togglePriceBoost() {
+      priceMultiplier = priceMultiplier === 1 ? 1.1 : 1;
+      renderMenu();
+    }
+
+    function toggleSoldOut() {
+      const croissant = menuData.find(m => m.id === 4);
+      if (croissant) croissant.soldOut = !croissant.soldOut;
+      renderMenu();
+    }
+
+    function callWaiter() {
+      alert('🔔 Masa bildiriminiz servis ekibinin ekranına iletildi! (Baserora QR Menü Önizlemesi)');
+    }
+
+    function sendTableOrder() {
+      alert('✅ Siparişiniz masa numarasıyla doğrudan mutfak ekranına düştü!');
+    }
+
+    renderMenu();
+  </script>
+</body>
+</html>
+
